@@ -14,15 +14,15 @@ public class DBConnection {
 	public Connection getConn(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/du?user=root&password=root");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/du?user=root");
 //			Statement statement = conn.createStatement();
 			return conn;
 //			String sql = null;
 //			ResultSet rs = statement.executeQuery(sql);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Êı¾İ¿âÁ¬½ÓÀà¼ÓÔØÊ§°Ü¡£¡£¡£");
+			System.out.println("ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½ï¿½");
 		} catch (SQLException e) {
-		    System.out.println("Êı¾İ¿âÇı¶¯¼ÓÔØÊ§°Ü¡£¡£¡£");
+		    System.out.println("ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return null;
@@ -34,13 +34,46 @@ public class DBConnection {
 		Statement statement;
 		try {
 			statement = conn.createStatement();
-			String sql = "select count(*) from uselist Where name="+userName+" and " +"pass="+pass;
+			String sql = "select count(*) from userlist Where name='"+userName+"' and " +"pass= '"+pass+"'";
 			ResultSet rs = statement.executeQuery(sql);
-			System.out.println(rs.getArray(0));
+			int rowCount = 0;    
+			while(rs.next())    
+			{    
+			    rowCount++;    
+			}  
+			System.out.println(rowCount);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public boolean login(String userName ,String pass){
+		Connection conn = getConn();
+		Statement statement;
+		ResultSet rs ;
+		int rowCount = 0;    
+		try {
+			statement = conn.createStatement();
+			String sql = "select * from userlist Where name='"+userName+"' and " +"pass= '"+pass+"'";
+			System.out.println(sql);
+			rs = statement.executeQuery(sql);
+			/*do{
+				rowCount++;    
+				System.out.println(rs.getObject(0));
+			}while(rs.next());    
+			System.out.println(rowCount);*/
+			rs.last();
+			rowCount = rs.getRow();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("row count : "+rowCount);
+		if (rowCount>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>登录</title>
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<link rel="stylesheet" href="style/common/common.css">
+<!-- <link rel="stylesheet" href="style/common/common.css"> -->
 <style type="text/css">
 body {
 	margin: 0;
@@ -76,13 +76,13 @@ fieldset {
 	padding: 10px 10px 0;
 }
 
-fieldset input[type=text] {
+/* fieldset input[type=text] {
 	background: url(style/default/images/user.png) 4px 5px no-repeat;
 }
 
 fieldset input[type=password] {
 	background: url(style/default/images/password.png) 4px 5px no-repeat;
-}
+} */
 
 fieldset input[type=text], fieldset input[type=password] {
 	width: 100%;
@@ -162,7 +162,7 @@ fieldset span {
 }
 </style>
 <% 
-   
+   String classPath = request.getContextPath();
 %>
 
 <script type="text/javascript">
@@ -174,21 +174,31 @@ fieldset span {
 		 $("#login").click(function(){
 			 //alert("sds");
 			 $.ajax({
-				 url:'/loginAssign',
+				 url:'<%=classPath%>/loginAssign',
 				 dataType:'text',
+				 method:'post',
 				 data:{'userName':$("#userName").val(),'password':$("#password").val()},
 				 success:function(response){
-					 
+					 // alert(response);
+					  if(response == 'success'){
+						  window.location.href="<%=classPath%>/home"; 
+					   }else{
+						  $("#userName").val("");
+						  $("#password").val("")
+						  alert("用户名或密码错误！");
+					  } 
 				 }
 			 });
 		 });
+		 
+		 
 	});
 </script>
 </head>
 
 <body>
 	<div class="wrap">
-		<form action="#" method="post">
+		<form id="loginForm" method="post">
 			<section class="loginForm"> <header>
 			<h1>企业供销存管理系统</h1>
 			<h2>登录</h2>
@@ -206,7 +216,7 @@ fieldset span {
 				</fieldset>
 				 
 				<fieldset>
-					<input id="login" type="submit" value="登录">  
+					<input id="login" type="button" value="登录">  
 				</fieldset>
 			</div>
 			</section>

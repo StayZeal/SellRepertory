@@ -13,12 +13,28 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>main</servlet-name>
-    <jsp-file>/WEB-INF/jsp/main.jsp</jsp-file>
+      <servlet-name>menu</servlet-name>
+      <jsp-file>/WEB-INF/jsp/menu.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>main</servlet-name>
-    <url-pattern>/main</url-pattern>
+      <servlet-name>menu</servlet-name>
+      <url-pattern>/menu</url-pattern>      
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>home</servlet-name>
+    <jsp-file>/WEB-INF/jsp/home.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>home</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>main</servlet-name>
+      <jsp-file>/WEB-INF/jsp/main.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>main</servlet-name>
+      <url-pattern>/main</url-pattern>
   </servlet-mapping>
   <servlet>
       <servlet-name>loginServlet</servlet-name>
@@ -27,5 +43,13 @@
   <servlet-mapping>
       <servlet-name>loginServlet</servlet-name>
       <url-pattern>/loginAssign</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>SpInfoManage</servlet-name>
+      <jsp-file>/WEB-INF/jsp/SpInfoManage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>SpInfoManage</servlet-name>
+      <url-pattern>/SpInfoManage</url-pattern>
   </servlet-mapping>
 </web-app>
